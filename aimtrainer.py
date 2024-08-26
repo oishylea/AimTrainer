@@ -19,7 +19,8 @@ GREEN = (0, 255, 0)
 # Load the target and player images
 target_image = pygame.image.load("target.png")
 player_image = pygame.image.load("player.png")
-
+target_image = pygame.transform.scale(target_image, (100, 100))
+player_image = pygame.transform.scale(player_image, (50, 50))
 # Define target properties
 TARGET_RADIUS = target_image.get_width() // 2
 TARGET_COLOR = GREEN
