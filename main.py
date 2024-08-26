@@ -34,7 +34,7 @@ PLAYER_COLOR = WHITE
 # Game variables
 score = 0
 game_start_time = pygame.time.get_ticks()
-game_duration = 60000  # 60 seconds
+game_duration = 20000  # 60 seconds
 game_over = False
 
 # Function to draw the target
@@ -61,6 +61,13 @@ async def main():
                 # Check if the player clicked on the target
                 mouse_x, mouse_y = event.pos
                 if (mouse_x - target_x) ** 2 + (mouse_y - target_y) ** 2 <= TARGET_RADIUS ** 2:
+                    score += 1
+                    target_x = random.randint(TARGET_RADIUS, WINDOW_WIDTH - TARGET_RADIUS)
+                    target_y = random.randint(TARGET_RADIUS, WINDOW_HEIGHT - TARGET_RADIUS)
+            elif event.type == pygame.FINGERDOWN and not game_over:
+                # Handle touch events
+                touch_pos = event.dict['pos']
+                if (touch_pos[0] - target_x) ** 2 + (touch_pos[1] - target_y) ** 2 <= TARGET_RADIUS ** 2:
                     score += 1
                     target_x = random.randint(TARGET_RADIUS, WINDOW_WIDTH - TARGET_RADIUS)
                     target_y = random.randint(TARGET_RADIUS, WINDOW_HEIGHT - TARGET_RADIUS)
@@ -99,7 +106,7 @@ async def main():
         screen.blit(text, (10, 40))
 
         if game_over:
-            text = font.render("Game Over", True, RED)
+            text = font.render("Game Overrr", True, RED)
             screen.blit(text, (WINDOW_WIDTH // 2 - 100, WINDOW_HEIGHT // 2 - 20))
 
         # Update the display
