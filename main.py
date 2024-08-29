@@ -18,15 +18,29 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 # Load the target and player images
-target_image = pygame.image.load("target.png")
+target_image = pygame.image.load("aufa.png")
 player_image = pygame.image.load("player.png")
-target_image = pygame.transform.scale(target_image, (100, 100))
+# target_image = pygame.transform.scale(target_image, (200, 100))
 player_image = pygame.transform.scale(player_image, (50, 50))
+
+# Get the original dimensions
+original_width = target_image.get_width()
+original_height = target_image.get_height()
+
+# Define the percentage (e.g., 50% for half the size)
+percentage = 0.5  # Adjust this value as needed
+
+# Calculate the new dimensions
+new_width = int(original_width * percentage)
+new_height = int(original_height * percentage)
+
+# Scale the image
+target_image = pygame.transform.scale(target_image, (new_width, new_height))
 
 # Define target properties
 TARGET_RADIUS = target_image.get_width() // 2
 TARGET_COLOR = GREEN
-TARGET_SPEED = 3
+TARGET_SPEED = 0
 
 # Player properties
 PLAYER_RADIUS = player_image.get_width() // 2
@@ -35,7 +49,7 @@ PLAYER_COLOR = WHITE
 # Game variables
 score = 0
 game_start_time = 0
-game_duration = 10000  # 20 seconds
+game_duration = 20000  # 20 seconds
 game_over = False
 game_started = False
 
@@ -138,14 +152,20 @@ async def main():
             font = pygame.font.Font(None, 36)
             score_text = font.render(f"{score}", True, BLACK)
             score_image = pygame.transform.scale(score_image, new_size)
-
-            font_size = 60  # Adjust this value for your desired text size
+            score_title = font.render(f"GAME OVER", True,BLACK)
+            yourscore_text = font.render(f"Your Score", True, BLACK)
+            font_size = 100  
             font = pygame.font.Font(None, font_size)
             image_rect = score_image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 20))
-            text_rect = score_text.get_rect(midright=(WINDOW_WIDTH - 250, WINDOW_HEIGHT // 2))  # Adjust the X value as needed
+            text_rect = score_text.get_rect(midright=(WINDOW_WIDTH - 250, WINDOW_HEIGHT // 2))  
+            title_rect = score_title.get_rect(midright=(WINDOW_WIDTH - 200, WINDOW_HEIGHT // 4)) 
+            yourscore_rect = yourscore_text.get_rect(midright=(WINDOW_WIDTH - 200, WINDOW_HEIGHT // 3)) 
 
             screen.blit(score_image, image_rect)
             screen.blit(score_text, text_rect)
+            screen.blit(score_title, title_rect)
+            screen.blit(yourscore_text, yourscore_rect)
+
 
         # Update the display
         pygame.display.flip()
