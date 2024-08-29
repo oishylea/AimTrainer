@@ -139,8 +139,10 @@ async def main():
             score_text = font.render(f"{score}", True, BLACK)
             score_image = pygame.transform.scale(score_image, new_size)
 
+            font_size = 60  # Adjust this value for your desired text size
+            font = pygame.font.Font(None, font_size)
             image_rect = score_image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 20))
-            text_rect = score_text.get_rect(midright=(WINDOW_WIDTH - 20, WINDOW_HEIGHT // 2))  # Adjust the X value as needed
+            text_rect = score_text.get_rect(midright=(WINDOW_WIDTH - 250, WINDOW_HEIGHT // 2))  # Adjust the X value as needed
 
             screen.blit(score_image, image_rect)
             screen.blit(score_text, text_rect)
