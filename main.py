@@ -35,7 +35,7 @@ PLAYER_COLOR = WHITE
 # Game variables
 score = 0
 game_start_time = 0
-game_duration = 20000  # 20 seconds
+game_duration = 10000  # 20 seconds
 game_over = False
 game_started = False
 
@@ -133,8 +133,17 @@ async def main():
             screen.blit(text, (10, 40))
 
         if game_over:
-            text = font.render("Game Over", True, RED)
-            screen.blit(text, (WINDOW_WIDTH // 2 - 100, WINDOW_HEIGHT // 2 - 20))
+            score_image = pygame.image.load("yourscore.png")
+            new_size = (500,400)
+            font = pygame.font.Font(None, 36)
+            score_text = font.render(f"{score}", True, BLACK)
+            score_image = pygame.transform.scale(score_image, new_size)
+
+            image_rect = score_image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 20))
+            text_rect = score_text.get_rect(midright=(WINDOW_WIDTH - 20, WINDOW_HEIGHT // 2))  # Adjust the X value as needed
+
+            screen.blit(score_image, image_rect)
+            screen.blit(score_text, text_rect)
 
         # Update the display
         pygame.display.flip()
