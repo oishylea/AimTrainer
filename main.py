@@ -18,7 +18,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 # Load the target and player images
-target_image = pygame.image.load("aufa.png")
+target_image = pygame.image.load("target.png")
 player_image = pygame.image.load("player.png")
 # target_image = pygame.transform.scale(target_image, (200, 100))
 player_image = pygame.transform.scale(player_image, (50, 50))
@@ -28,7 +28,7 @@ original_width = target_image.get_width()
 original_height = target_image.get_height()
 
 # Define the percentage (e.g., 50% for half the size)
-percentage = 0.5  # Adjust this value as needed
+percentage = 0.1  # Adjust this value as needed
 
 # Calculate the new dimensions
 new_width = int(original_width * percentage)
@@ -40,7 +40,7 @@ target_image = pygame.transform.scale(target_image, (new_width, new_height))
 # Define target properties
 TARGET_RADIUS = target_image.get_width() // 2
 TARGET_COLOR = GREEN
-TARGET_SPEED = 0
+TARGET_SPEED = 3
 
 # Player properties
 PLAYER_RADIUS = player_image.get_width() // 2
