@@ -108,8 +108,9 @@ async def main():
         if not game_started:
             pygame.draw.rect(screen, WHITE, start_button_rect)
             font = pygame.font.Font(None, 36)
-            text = font.render("Start Game", True, BLACK)
-            screen.blit(text, (start_button_rect.x + 30, start_button_rect.y + 30))
+            text = font.render("Click To Start Game", True, BLACK)
+            text_rect = text.get_rect(center=(start_button_rect.centerx, start_button_rect.centery))
+            screen.blit(text, text_rect)
 
         # Draw the target
         if game_started:
